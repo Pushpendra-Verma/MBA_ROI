@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+# Here is the code for the MBA ROI Calculator app using Streamlit. The app allows users to input various parameters related to their MBA program and calculates the return on investment (ROI) based on those inputs.
 @st.cache_data
 def format_currency(value):
     return "₹{:,.2f}".format(value).replace(",", "~").replace("~", ",")
