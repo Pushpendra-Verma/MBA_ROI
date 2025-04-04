@@ -65,7 +65,7 @@ def display_dashboard():
     st.set_page_config(page_title="MBA ROI Calculator", layout="wide")
     # Embed Google Analytics script into your app
     components.html(GA_TRACKING_CODE)
-    st.markdown("<h1 style='text-align: center; font-size: 55px; margin-bottom: 10px;'>📊 MBA ROI Calculator</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; font-size: 55px; margin-top: 10px;'>📊 MBA ROI Calculator</h1>", unsafe_allow_html=True)
     
     with st.sidebar:
         st.header("📌 Input Parameters")
