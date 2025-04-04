@@ -11,8 +11,16 @@ GA_TRACKING_CODE = """
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-2C4BWSY10M');
+
+  // Debug: Log to console when gtag.js loads
+  window.addEventListener('load', function() {
+    if (typeof gtag === 'function') {
+      console.log('gtag.js loaded successfully');
+    } else {
+      console.log('gtag.js failed to load');
+    }
+  });
 </script>
 """
 
@@ -65,13 +73,22 @@ def display_dashboard():
     st.set_page_config(page_title="MBA ROI Calculator", layout="wide")
     # Embed Google Analytics script into your app
     components.html(GA_TRACKING_CODE, height=0)  # Set height=0 to avoid adding space
-    # Trigger a page view for SPA
+    # Trigger a page view for SPA with a retry mechanism
     components.html("""
     <script>
-      gtag('event', 'page_view', {
-        page_title: 'MBA ROI Calculator',
-        page_path: '/',
-      });
+      function sendPageView() {
+        if (typeof gtag === 'function') {
+          gtag('event', 'page_view', {
+            page_title: 'MBA ROI Calculator',
+            page_path: '/',
+          });
+          console.log('Page view sent to Google Analytics');
+        } else {
+          console.log('gtag not ready, retrying...');
+          setTimeout(sendPageView, 500); // Retry after 500ms
+        }
+      }
+      window.addEventListener('load', sendPageView);
     </script>
     """, height=0)  # Set height=0 to avoid adding space
 
