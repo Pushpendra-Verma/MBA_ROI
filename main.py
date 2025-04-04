@@ -2,6 +2,19 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import streamlit.components.v1 as components
+
+GA_TRACKING_CODE = """
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2C4BWSY10M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2C4BWSY10M');
+</script>
+"""
 
 # Here is the code for the MBA ROI Calculator app using Streamlit. The app allows users to input various parameters related to their MBA program and calculates the return on investment (ROI) based on those inputs.
 @st.cache_data
@@ -50,6 +63,8 @@ def mba_roi_calculator(total_fees, pre_mba_salary, post_mba_salary, duration, li
 
 def display_dashboard():
     st.set_page_config(page_title="MBA ROI Calculator", layout="wide")
+    # Embed Google Analytics script into your app
+    components.html(GA_TRACKING_CODE)
     st.markdown("<h1 style='text-align: center; font-size: 55px; margin-bottom: 10px;'>📊 MBA ROI Calculator</h1>", unsafe_allow_html=True)
     
     with st.sidebar:
