@@ -1,3 +1,5 @@
+![image](https://github.com/user-attachments/assets/b1571b3f-3210-4b9a-b6a2-84131ea3c698)
+
 ROI (Return on Investment) for GitHub Publishing:
 Definition: ROI is a performance metric used to evaluate the efficiency or profitability of an investment. In the context of GitHub publishing, ROI can be measured as the benefit you receive (such as contributions, collaboration, or code visibility) relative to the effort or cost you put into maintaining and updating a repository.
 
