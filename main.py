@@ -64,8 +64,72 @@ def mba_roi_calculator(total_fees, pre_mba_salary, post_mba_salary, duration, li
 def display_dashboard():
     st.set_page_config(page_title="MBA ROI Calculator", layout="wide")
     # Embed Google Analytics script into your app
-    components.html(GA_TRACKING_CODE)
-    st.markdown("<h1 style='text-align: center; font-size: 55px; margin-top: 10px;'>📊 MBA ROI Calculator</h1>", unsafe_allow_html=True)
+    components.html(GA_TRACKING_CODE, height=0)  # Set height=0 to avoid adding space
+    # Trigger a page view for SPA
+    components.html("""
+    <script>
+      gtag('event', 'page_view', {
+        page_title: 'MBA ROI Calculator',
+        page_path: '/',
+      });
+    </script>
+    """, height=0)  # Set height=0 to avoid adding space
+
+    # Inject custom CSS to fix blank space above heading and ensure responsiveness
+    custom_css = """
+    <style>
+        /* Remove padding/margin above the main container */
+        .main .block-container {
+            padding: 0rem 1rem 1rem 1rem !important; /* Remove top padding */
+            margin-top: 0 !important;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Remove extra space above the heading */
+        h1 {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+
+        /* Adjust column widths to balance content */
+        .stHorizontal > div {
+            display: flex;
+            gap: 1rem;
+        }
+        .stHorizontal > div > div {
+            flex: 1;
+            min-width: 0; /* Prevents overflow */
+        }
+
+        /* Ensure the chart stretches fully */
+        .stPlotlyChart {
+            width: 100% !important;
+            height: 400px !important; /* Adjust height as needed */
+        }
+
+        /* Reduce unnecessary padding/margins */
+        .stMarkdown, .stMetric {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .stHorizontal > div {
+                flex-direction: column;
+            }
+            .stHorizontal > div > div {
+                width: 100% !important;
+            }
+            .stPlotlyChart {
+                height: 300px !important;
+            }
+        }
+    </style>
+    """
+    st.markdown(custom_css, unsafe_allow_html=True)
+    
+    st.markdown("<h1 style='text-align: center; font-size: 55px; margin-top: 2px;'>📊 MBA ROI Calculator</h1>", unsafe_allow_html=True)
     
     with st.sidebar:
         st.header("📌 Input Parameters")
